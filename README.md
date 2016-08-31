@@ -4,4 +4,5 @@
 ```
 npm install express --save
 npm install traceur --save
+npm install mongodb --save
 ```
