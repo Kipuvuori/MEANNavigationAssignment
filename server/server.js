@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 
+var traceur = require('traceur');
+traceur.require.makeDefault(function(file) {
+  return file.indexOf('node_modules') == -1;
+});
 
 const PORT=8000;
 var GoogleAPI = require('./GoogleAPI.js');
