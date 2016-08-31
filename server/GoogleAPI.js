@@ -1,15 +1,15 @@
 var fs = require('fs');
 var https = require('https');
 
-class GoogleAPI {
+var addRoute = require('./Mongo.js');
 
+
+class GoogleAPI {
 
   constructor() {
     this.API_KEY="AIzaSyBvuj68UXjb-wKx9VIF2Zuo_fol5vihQcs";
     this.BASE_URL="https://maps.googleapis.com/maps/api/";
   }
-
-
 
   directions(origin, destination, data_type, cb)
   {
@@ -36,6 +36,7 @@ class GoogleAPI {
             cordinates.push(steps[i].end_location);
           }
         }
+        addRoute(origin, destination, cordinates);
         json=JSON.stringify(cordinates);
         cb(json);
       });
