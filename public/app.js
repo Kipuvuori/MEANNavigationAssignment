@@ -8,7 +8,7 @@ traceur.require.makeDefault(function(file) {
 });
 
 // Port for server
-const PORT=8080;
+const PORT=8888;
 
 app.get('/',
   function(request, response)
