@@ -21,8 +21,9 @@ app.get('/:origin/:destination',
     console.log(params);
     // Get route data from google and save it to database
     GoogleAPI.directions(params.origin, params.destination, "json",
-      function(data)
+      function(points)
       {
+        data=JSON.stringify(points);
         // Output route data
         response.end(data);
       }

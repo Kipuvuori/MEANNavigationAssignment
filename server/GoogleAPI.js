@@ -1,7 +1,7 @@
 var fs = require('fs');
 var https = require('https');
 
-var addRoute = require('./Mongo.js');
+var Mongo = require('./Mongo.js');
 
 class GoogleAPI {
   constructor() {
@@ -11,50 +11,59 @@ class GoogleAPI {
 
   directions(origin, destination, data_type, cb)
   {
-    // Make url for request
     var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+this.API_KEY;
-    url=encodeURI(url);
-    console.log(url);
-    var data="";
-    https.get(url,
-      (response) =>
+    Mongo.getRoute(origin, destination,
+      function(points)
       {
-        // Adding chunk to data.
-        response.on('data',
-          function (chunk)
-          {
-            data += chunk;
-          }
-        );
-
-        // All data has been read
-        response.on('end',
-          function ()
-          {
-            // Make json
-            var json=JSON.parse(data);
-            // Parse out only cordinates
-            var cordinates=[];
-            if ('routes' in json && json.routes.length > 0 && 'legs' in json.routes[0] &&
-              json.routes[0].legs.length > 0 && 'steps' in json.routes[0].legs[0] &&
-              json.routes[0].legs[0].steps.length > 0)
+        console.log(points);
+        if(points) cb(points);
+        else
+        {
+          // Make url for request
+          url=encodeURI(url);
+          console.log(url);
+          var data="";
+          https.get(url,
+            (response) =>
             {
-              var steps=json.routes[0].legs[0].steps;
-              for (var i = 0, len = steps.length; i < len; i++) {
-                cordinates.push(steps[i].end_location);
-              }
+              // Adding chunk to data.
+              response.on('data',
+                function (chunk)
+                {
+                  data += chunk;
+                }
+              );
+
+              // All data has been read
+              response.on('end',
+                function ()
+                {
+                  // Make json
+                  var json=JSON.parse(data);
+                  // Parse out only cordinates
+                  var points=[];
+                  if ('routes' in json && json.routes.length > 0 && 'legs' in json.routes[0] &&
+                    json.routes[0].legs.length > 0 && 'steps' in json.routes[0].legs[0] &&
+                    json.routes[0].legs[0].steps.length > 0)
+                  {
+                    var steps=json.routes[0].legs[0].steps;
+                    for (var i = 0, len = steps.length; i < len; i++) {
+                      points.push(steps[i].end_location);
+                    }
+                  }
+                  Mongo.addRoute(origin, destination, points); // Save route to database
+                  // Send cordinates to client
+                  cb(points);
+                }
+              );
             }
-            addRoute(origin, destination, cordinates); // Save route to database
-            // Send cordinates to client
-            json=JSON.stringify(cordinates);
-            cb(json);
-          }
-        );
-      }
-    ).on('error',
-      (e) =>
-      {
-        console.error(e);
+          ).on('error',
+            (e) =>
+            {
+              console.error(e);
+            }
+          );
+        }
       }
     );
   }
