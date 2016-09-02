@@ -1,3 +1,5 @@
+var conf = require("./../conf");
+
 var express = require('express');
 var app = express();
 
@@ -7,11 +9,8 @@ traceur.require.makeDefault(function(file) {
   return file.indexOf('node_modules') == -1;
 });
 
-// Port for server
-const PORT=8000;
-
 // GoogleAPI class for handeling location requests
-var GoogleAPI = require('./GoogleAPI.js');
+var GoogleAPI = require('./GoogleAPI');
 
 app.get('/:origin/:destination',
   function(request, response)
@@ -31,4 +30,4 @@ app.get('/:origin/:destination',
   }
 );
 
-app.listen(PORT);
+app.listen(conf.PORT_SERVER);

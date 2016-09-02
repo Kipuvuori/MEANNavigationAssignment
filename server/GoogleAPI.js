@@ -1,3 +1,5 @@
+var conf = require("./../conf");
+
 var fs = require('fs');
 var https = require('https');
 
@@ -5,13 +7,12 @@ var Mongo = require('./Mongo.js');
 
 class GoogleAPI {
   constructor() {
-    this.API_KEY="AIzaSyBvuj68UXjb-wKx9VIF2Zuo_fol5vihQcs";
     this.BASE_URL="https://maps.googleapis.com/maps/api/";
   }
 
   directions(origin, destination, data_type, cb)
   {
-    var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+this.API_KEY;
+    var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+conf.API_KEY;
     Mongo.getRoute(origin, destination,
       function(points)
       {

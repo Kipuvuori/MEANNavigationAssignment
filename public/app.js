@@ -1,3 +1,5 @@
+var conf = require("./../conf");
+
 var express = require('express');
 var app = express();
 
@@ -17,4 +19,4 @@ app.get('/',
   }
 );
 
-app.listen(PORT);
+app.listen(conf.PORT_APP);

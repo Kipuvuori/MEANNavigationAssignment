@@ -1,15 +1,10 @@
+var conf = require("./../conf");
+
 var mongodb = require('mongodb');
 
 var MongoClient = mongodb.MongoClient;
 
-const DATABASE="mean_navigation";
-const SERVER="localhost";
-const PORT="27017";
-
-const COLLECTION_ROUTES="routes";
-const COLLECTION_POINTS="points";
-
-var url = "mongodb://"+SERVER+":"+PORT+"/"+DATABASE;
+var url = "mongodb://"+conf.SERVER_DATABASE+":"+conf.PORT_DATABASE+"/"+conf.DATABASE;
 
 
 
@@ -42,7 +37,7 @@ class Mongo {
     query(
       function(db, cb)
       {
-        var collection = db.collection(COLLECTION_ROUTES); // Collection 'table' for routes
+        var collection = db.collection(conf.COLLECTION_ROUTES); // Collection 'table' for routes
         // Add route to database
         var routes=[{origin:origin, destination:destination}];
         collection.insert(routes,
@@ -70,7 +65,7 @@ class Mongo {
                 points[i].route_id=route_id;
                 ++order_num;
               }
-              var collection = db.collection(COLLECTION_POINTS); // Collection 'table' for points
+              var collection = db.collection(conf.COLLECTION_POINTS); // Collection 'table' for points
               // Add points to database
               collection.insert(points,
                 function (err, result)
@@ -92,7 +87,7 @@ class Mongo {
     query(
       function(db, cb)
       {
-        var collection = db.collection(COLLECTION_ROUTES); // Collection 'table' for routes
+        var collection = db.collection(conf.COLLECTION_ROUTES); // Collection 'table' for routes
         // Add route to database
         var routes=[{origin:origin, destination:destination}];
         collection.findOne({origin: origin, destination:destination},
@@ -108,7 +103,7 @@ class Mongo {
             }
             else if(route && "_id" in route && route._id)
             {
-              var collection = db.collection(COLLECTION_POINTS); // Collection 'table' for points
+              var collection = db.collection(conf.COLLECTION_POINTS); // Collection 'table' for points
               var ObjectId = require('mongodb').ObjectID;
               console.log(route._id);
               collection.find({"route_id": ObjectId(route._id)}, {'lng': true, 'lat': true, '_id':false}).sort({order_num: 1}).toArray(
