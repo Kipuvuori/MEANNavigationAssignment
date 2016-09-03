@@ -11,10 +11,12 @@ traceur.require.makeDefault(function(file) {
 
 // GoogleAPI class for handeling location requests
 var GoogleAPI = require('./GoogleAPI');
+var MajorCities = require('./MajorCities');
 
 app.get('/:origin/:destination',
   function(request, response)
   {
+    response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     // Get parameters from url
     var params=request.params;
     console.log(params);
@@ -30,4 +32,17 @@ app.get('/:origin/:destination',
   }
 );
 
+app.get("/major_cities",
+  function(request, response)
+  {
+    response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    MajorCities.get(
+      function (data)
+      {
+        data=JSON.stringify(data);
+        response.end(data);
+      }
+    );
+  }
+);
 app.listen(conf.PORT_SERVER);

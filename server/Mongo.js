@@ -6,10 +6,6 @@ var MongoClient = mongodb.MongoClient;
 
 var url = "mongodb://"+conf.SERVER_DATABASE+":"+conf.PORT_DATABASE+"/"+conf.DATABASE;
 
-
-
-
-
 class Mongo {
   constructor() {
 
@@ -156,7 +152,5 @@ class Mongo {
     );
   }
 }
-
-
 
 module.exports = new Mongo();
