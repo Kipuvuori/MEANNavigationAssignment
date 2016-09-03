@@ -82,9 +82,10 @@ class Mongo {
   }
 
   // Query for adding route to database
-  addRoute(origin, destination, points)
+  addRoute(route, points)
   {
-    var routes = [{origin:origin, destination:destination}];
+    var routes = [route];
+    var self=this;
     this.insert(conf.COLLECTION_ROUTES, routes,
       function (err, result)
       {
@@ -102,7 +103,7 @@ class Mongo {
             points[i].route_id=route_id;
             ++order_num;
           }
-          this.insert(conf.COLLECTION_POINTS, points,
+          self.insert(conf.COLLECTION_POINTS, points,
             function (err, result)
             {
               if (err) console.log(err); // Handle error
@@ -125,14 +126,13 @@ class Mongo {
         if (err)
         {
           console.log(err);
-          cb(db);
           return_cb(false);
         }
         else if(route && "_id" in route && route._id)
         {
           var ObjectId = require('mongodb').ObjectID;
           var query = {"route_id": ObjectId(route._id)};
-          var columns = {'lng': true, 'lat': true, '_id':false};
+          var columns = {'lng': true, 'lat': true, '_id':false, 'distance':true};
           var order = {order_num: 1};
           self.find(conf.COLLECTION_POINTS, query, columns, order,
             function(err, points)
@@ -143,11 +143,16 @@ class Mongo {
                 console.log(err);
                 return_cb(false);
               }
-              else if(points && points.length > 0) return_cb(points);
+              else if(points && points.length > 0)
+              {
+                route.points=points;
+                return_cb(route);
+              }
               else return_cb(false);
             }
           );
         }
+        else return_cb(false);
       }
     );
   }

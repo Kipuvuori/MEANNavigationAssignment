@@ -21,6 +21,7 @@ class GoogleAPI {
         {
           // Make url for request
           url=encodeURI(url);
+          console.log(url);
           var data="";
           https.get(url,
             (response) =>
@@ -39,6 +40,8 @@ class GoogleAPI {
                 {
                   // Make json
                   var json=JSON.parse(data);
+                  var route = {origin:origin, destination:destination};
+                  var distance=0;
                   // Parse out only cordinates
                   var points=[];
                   if ('routes' in json && json.routes.length > 0 && 'legs' in json.routes[0] &&
@@ -47,12 +50,17 @@ class GoogleAPI {
                   {
                     var steps=json.routes[0].legs[0].steps;
                     for (var i = 0, len = steps.length; i < len; i++) {
-                      points.push(steps[i].end_location);
+                      var point = steps[i].end_location;
+                      point.distance = steps[i].distance["value"];
+                      distance += point.distance;
+                      points.push(point);
                     }
                   }
-                  Mongo.addRoute(origin, destination, points); // Save route to database
+                  route.distance = distance;
+                  Mongo.addRoute(route, points); // Save route to database
                   // Send cordinates to client
-                  cb(points);
+                  route.points=points;
+                  cb(route);
                 }
               );
             }
@@ -60,6 +68,7 @@ class GoogleAPI {
             (e) =>
             {
               console.error(e);
+              cb([]);
             }
           );
         }
