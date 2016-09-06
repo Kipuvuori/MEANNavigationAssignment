@@ -1,5 +1,5 @@
 # MEANNavigationAssignment
-Tampere University of Applied Sciences 2016 Software engineering Laboratory Course's JavaScript-assignment.
+[Tampere University of Applied Sciences](http://www.tamk.fi/web/tamken) 2016 Software engineering Laboratory Course's JavaScript-assignment.
 
 Aim of this assignment is to create simple node based navigation between Finnish cities using MEAN stack.
 
@@ -8,16 +8,20 @@ Aim of this assignment is to create simple node based navigation between Finnish
 
 ## Node depencies
 - [express](https://github.com/expressjs/express)
-``` 
-npm install express --save 
+```
+npm install express --save
 ```
 - [Traceur](https://github.com/google/traceur-compiler)
-``` 
-npm install traceur --save 
+```
+npm install traceur --save
 ```
 - [MongoDB Node.JS Driver](https://mongodb.github.io/node-mongodb-native/)
-``` 
-npm install mongodb --save 
+```
+npm install mongodb --save
+```
+- [CSV Parser](https://github.com/wdavidw/node-csv-parse)
+```
+npm install csv-parse --save
 ```
 
 
