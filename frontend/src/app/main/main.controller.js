@@ -9,17 +9,21 @@ export class MainController {
 	submitQuery(){
 		this.$http({
 		method: 'GET',
-		url: 'http://localhost:8000/'+this.origin+'/'+this.destination
+		url: 'http://192.168.1.148:8000/'+this.origin+'/'+this.destination
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
-				this.$log.debug(response.data);
+				console.log(response.data);
+				return response.data.distance;
 		},
 		function errorCallback(response) {
 		// called asynchronously if an error occurs
 		// or server returns response with an error status.
-			this.$log.error(response.status+'('+response.statusText+')'+' '+response.data);
+			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
+			console.log(response);
+			return false;
 		});
+		this.distance;
 	}
 
 }
