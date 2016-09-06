@@ -1,32 +1,25 @@
 export class MainController {
-  constructor ($timeout, webDevTec, toastr) {
-    'ngInject';
+	constructor ($http,$log) {
+	'ngInject';
 
-    this.awesomeThings = [];
-    this.classAnimation = '';
-    this.creationDate = 1473159256020;
-    this.toastr = toastr;
+		this.$http = $http;
+		this.$log = $log;
+	}
 
-    this.activate($timeout, webDevTec);
-  }
+	submitQuery(){
+		this.$http({
+		method: 'GET',
+		url: 'http://localhost:8000/'+this.origin+'/'+this.destination
+		}).then(function successCallback(response) {
+		// this callback will be called asynchronously
+		// when the response is available
+				this.$log.debug(response.data);
+		},
+		function errorCallback(response) {
+		// called asynchronously if an error occurs
+		// or server returns response with an error status.
+			this.$log.error(response.status+'('+response.statusText+')'+' '+response.data);
+		});
+	}
 
-  activate($timeout, webDevTec) {
-    this.getWebDevTec(webDevTec);
-    $timeout(() => {
-      this.classAnimation = 'rubberBand';
-    }, 4000);
-  }
-
-  getWebDevTec(webDevTec) {
-    this.awesomeThings = webDevTec.getTec();
-
-    angular.forEach(this.awesomeThings, (awesomeThing) => {
-      awesomeThing.rank = Math.random();
-    });
-  }
-
-  showToastr() {
-    this.toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-    this.classAnimation = '';
-  }
 }
