@@ -32,6 +32,7 @@ class Mongo {
 
   insert(collection_name, data, callback)
   {
+    if(!data || data == null || data.length <= 0) return false;
     this.query(
       function(db, cb)
       {
