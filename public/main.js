@@ -1,18 +1,9 @@
-export class MainController {
-	constructor ($http,$log) {
-	'ngInject';
+// Define the `phonecatApp` module
+var phonecatApp = angular.module('navigationApp', []);
 
-		this.$http = $http;
-		this.$log = $log;
-
-		this.distance = null;
-	}
-
-	submitQuery(){
-
-
-		var parent = this;
-
+// Define the `PhoneListController` controller on the `phonecatApp` module
+phonecatApp.controller('navigationController', function navigationController($scope, $http) {
+  submitQuery(){
 		this.$http({
 		method: 'GET',
 		url: 'http://192.168.1.148:8000/'+this.origin+'/'+this.destination
@@ -20,7 +11,7 @@ export class MainController {
 		// this callback will be called asynchronously
 		// when the response is available
 				console.log(response.data);
-				parent.distance = response.data.distance;
+				$scope.distance = response.data.distance;
 		},
 		function errorCallback(response) {
 		// called asynchronously if an error occurs
@@ -28,5 +19,4 @@ export class MainController {
 			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
 		});
 	}
-
-}
+});

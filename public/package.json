@@ -1,0 +1,23 @@
+{
+  "name": "front",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "front end for this assingnment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment.git"
+  },
+  "author": "Anton Lehmus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment/issues"
+  },
+  "homepage": "https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment#readme",
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
