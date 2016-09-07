@@ -13,6 +13,12 @@ traceur.require.makeDefault(function(file) {
 var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
 
+app.use(function(request, response, next){
+	response.header('Access-Control-Allow-Origin', '*');
+	response.header('Access-Control-Allow-Headers','Content-Type, Authorization');
+	next();
+})
+
 app.get('/:origin/:destination',
   function(request, response)
   {

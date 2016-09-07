@@ -15,8 +15,7 @@ const PORT=8888;
 app.get('/',
   function(request, response)
   {
-    response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    response.end("Working");
+    res.sendFile('index.html');
   }
 );
 

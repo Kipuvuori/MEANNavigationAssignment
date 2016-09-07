@@ -5,25 +5,3 @@ Aim of this assignment is to create simple node based navigation between Finnish
 
 ## License
   [Apache 2.0](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/LICENSE)
-
-## Node depencies
-- [express](https://github.com/expressjs/express)
-```
-npm install express --save
-```
-- [Traceur](https://github.com/google/traceur-compiler)
-```
-npm install traceur --save
-```
-- [MongoDB Node.JS Driver](https://mongodb.github.io/node-mongodb-native/)
-```
-npm install mongodb --save
-```
-- [CSV Parser](https://github.com/wdavidw/node-csv-parse)
-```
-npm install csv-parse --save
-```
-
-
-## Additional frameworks / libraries
-  - [Twitter bootstrap](https://getbootstrap.com/)
