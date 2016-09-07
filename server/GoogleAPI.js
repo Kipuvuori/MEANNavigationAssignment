@@ -12,7 +12,7 @@ class GoogleAPI {
 
   directions(origin, destination, data_type, cb)
   {
-    var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+conf.API_KEY;
+    var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+conf.API_DIRECTIONS_KEY;
     Mongo.getRoute(origin, destination,
       function(points)
       {
