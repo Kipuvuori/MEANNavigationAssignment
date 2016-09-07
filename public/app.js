@@ -12,11 +12,11 @@ traceur.require.makeDefault(function(file) {
 // Port for server
 const PORT=8888;
 
-app.get('/',
-  function(request, response)
-  {
-    res.sendFile('index.html');
-  }
-);
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res){
+  res.redirec('index.html');
+});
+
 
 app.listen(conf.PORT_APP);
