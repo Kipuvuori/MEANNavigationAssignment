@@ -1,6 +1,7 @@
 var conf = require("./../conf");
 
 var express = require('express');
+var cors = require('cors');
 var app = express();
 
 
@@ -14,8 +15,15 @@ traceur.require.makeDefault(function(file) {
 var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
 
+//Enable CORS for request coming from front end
+var corsOptions = {
+  origin: conf.HOST,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 
 app.get('/:origin/:destination',
+	cors(corsOptions),
   function(request, response)
   {
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -35,6 +43,7 @@ app.get('/:origin/:destination',
 );
 
 app.get("/major_cities",
+	cors(corsOptions),
   function(request, response)
   {
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });

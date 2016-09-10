@@ -3,13 +3,11 @@ var conf = require("./../conf");
 var path = require('path');
 var compression = require('compression');
 var express = require('express');
-var favicon = require('serve-favicon');
 var serveStatic = require('serve-static');
 
 var app = express();
 
 app.use(compression());
-app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // Traceur for handeling non ECMAScript 6 versions
 var traceur = require('traceur');

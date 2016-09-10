@@ -10,19 +10,15 @@ navigationApp.config(['$httpProvider', function($httpProvider) {
 
 navigationApp.controller('navigationController', function navigationController($scope, $http) {
 
-	var distance = null;
-
   $scope.submitQuery = function() {
-		console.log('hello');
-		distance = $this.distance;
-		this.$http({
+		$http({
 		method: 'GET',
-		url: '/'+this.origin+'/'+this.destination
+		url: 'http://vanillasky.local:8000/'+$scope.origin+'/'+$scope.destination
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
 				console.log(response.data);
-				distance = response.data.distance;
+				$scope.distance = response.data.distance;
 		},
 		function errorCallback(response) {
 		// called asynchronously if an error occurs
