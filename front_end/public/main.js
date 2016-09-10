@@ -1,12 +1,5 @@
 var navigationApp = angular.module('navigationApp', []);
 
-// Allow cross domain request from web server through angular.js
-navigationApp.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }
-]);
-
 
 navigationApp.controller('navigationController', function navigationController($scope, $http) {
 
@@ -26,4 +19,6 @@ navigationApp.controller('navigationController', function navigationController($
 			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
 		});
 	}
+
+
 });
