@@ -19,7 +19,10 @@
   "homepage": "https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment#readme",
   "dependencies": {
     "angular": "^1.5.8",
+    "compression": "^1.6.2",
     "express": "^4.14.0",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.11.1",
     "traceur": "0.0.111"
   }
 }

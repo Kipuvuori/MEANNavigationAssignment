@@ -3,6 +3,7 @@ var conf = require("./../conf");
 var express = require('express');
 var app = express();
 
+
 // Traceur for handeling non ECMAScript 6 versions
 var traceur = require('traceur');
 traceur.require.makeDefault(function(file) {
@@ -13,11 +14,6 @@ traceur.require.makeDefault(function(file) {
 var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
 
-app.use(function(request, response, next){
-	response.header('Access-Control-Allow-Origin', '*');
-	response.header('Access-Control-Allow-Headers','Content-Type, Authorization');
-	next();
-})
 
 app.get('/:origin/:destination',
   function(request, response)
@@ -51,4 +47,7 @@ app.get("/major_cities",
     );
   }
 );
+
+
+
 app.listen(conf.PORT_SERVER);
