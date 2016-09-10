@@ -9,6 +9,16 @@ var app = express();
 
 app.use(compression());
 
+// Writing needed info to conf.js file
+var fs = require('fs');
+fs.writeFile(__dirname + '/public/conf.js', "var REST='" + conf.HOST + ':' + conf.PORT_SERVER + "';", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The conf.js file was saved!");
+});
+
 // Traceur for handeling non ECMAScript 6 versions
 var traceur = require('traceur');
 traceur.require.makeDefault(function(file) {

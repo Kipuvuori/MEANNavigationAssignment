@@ -6,7 +6,7 @@ navigationApp.controller('navigationController', function navigationController($
   $scope.submitQuery = function() {
 		$http({
 		method: 'GET',
-		url: 'http://vanillasky.local:8000/'+$scope.origin+'/'+$scope.destination
+		url: REST + '/'+$scope.origin+'/'+$scope.destination
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available

@@ -17,7 +17,7 @@ var MajorCities = require('./MajorCities');
 
 //Enable CORS for request coming from front end
 var corsOptions = {
-  origin: conf.HOST,
+  origin: conf.HOST+":"+conf.PORT_APP,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
