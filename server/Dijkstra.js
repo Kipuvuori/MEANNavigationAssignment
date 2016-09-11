@@ -1,30 +1,10 @@
 var conf = require("./../conf");
+var tools = require("./../Tools");
 
 var MajorCities = require('./MajorCities.js');
 
-function distanceAsM(obj1,obj2) {
-  var R = 6371000; // Radius of the earth in meters
-  var dLat = deg2rad(obj2.lat-obj1.lat);
-  var dLon = deg2rad(obj2.lng-obj1.lng);
-  var a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(obj1.lat)) * Math.cos(deg2rad(obj2.lat)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  var d = R * c; // Distance in meters
-
-  return d;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI/180)
-}
-
-
 class Dijkstra {
   constructor() {
-    this.max_rows = 20;
   }
   getRoute(origin, destination, callback)
   {
@@ -32,26 +12,47 @@ class Dijkstra {
     MajorCities.get(
       function(major_cities)
       {
-        console.log("Got major cities");
-        var twoDimentionalArray = self.toTwoDimentionalArray(major_cities);
-        console.log("Got twoDimentionalArray");
-        var nodes = self.nodes(twoDimentionalArray);
-        console.log("Got nodes");
-
-        var route = self.fastest_route(nodes, origin, destination);
-        console.log("Got route");
-        var prev_name = origin;
-        for(var i = 0; i < route.points.length; ++i)
+        var route = {
+          origin: origin, destination: destination,
+          distance:0, points: []
+        };
+        if(!tools.isEmpty(major_cities))
         {
-          var name = route.points[i];
-          var point = major_cities.filter(function( obj ) {
-            return obj.name == name;
-          })[0];
-          delete point._id;
-          delete point.no;
-          point.distance = nodes[prev_name][name];
-          route.points[i] = point;
-          prev_name = name;
+          var twoDimentionalArray = self.toTwoDimentionalArray(major_cities);
+          if(!tools.isEmpty(twoDimentionalArray))
+          {
+            var nodes = self.nodes(twoDimentionalArray);
+            if(!tools.isEmpty(nodes))
+            {
+              var fastest_route = self.fastest_route(nodes, origin, destination);
+              if(!tools.isEmpty(fastest_route) && !tools.isEmpty(fastest_route.points))
+              {
+                var prev_name = origin;
+                for(var i = 0; i < fastest_route.points.length; ++i)
+                {
+                  var name = fastest_route.points[i];
+                  var point = major_cities.filter(function( obj ) {
+                    return obj.name == name;
+                  })[0];
+                  if(tools.isEmpty(point))
+                  {
+                    point = {name: name, lat: 0, lng: 0};
+                  }
+                  else {
+                    delete point._id;
+                    delete point.no;
+                  }
+                  var distance = nodes[prev_name][name];
+                  if(tools.isEmpty(distance)) distance = 0;
+                  point.distance = distance;
+                  fastest_route.points[i] = point;
+                  prev_name = name;
+                }
+                route.points = fastest_route.points;
+                route.distance = fastest_route.distance;
+              }
+            }
+          }
         }
         callback(route);
       }
@@ -67,7 +68,7 @@ class Dijkstra {
       var lat_major_cities = [];
       var lats = [];
       var lat = 0;
-      for(var i = 0; i < major_cities.length && i < this.max_rows*3; ++i)
+      for(var i = 0; i < major_cities.length; ++i)
       {
         major_city = major_cities[i];
         lat = major_city.lat;
@@ -126,7 +127,7 @@ class Dijkstra {
               if(col_x >= 0)
               {
                 var neighbor = neigh_row[col_x];
-                nodes[major_city.name][neighbor.name] = distanceAsM(major_city,neighbor);
+                nodes[major_city.name][neighbor.name] = tools.distanceAsM(major_city,neighbor);
               }
             }
           }
@@ -177,8 +178,7 @@ class Dijkstra {
     }
 
     route.push(u);
-    return {origin: origin, destination: destination,
-      points: route.reverse(), distance: dist[destination]};
+    return { points: route.reverse(), distance: dist[destination]};
   }
 }
 module.exports = new Dijkstra();
