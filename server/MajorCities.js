@@ -7,7 +7,7 @@ var GoogleAPI = require('./GoogleAPI');
 
 class MajorCities {
   constructor() {
-
+    this.limit = 20 * 3;
   }
 
   parseCSV(callback)
@@ -84,8 +84,8 @@ class MajorCities {
     var self=this;
     var query = {};
     var columns = {};
-    var order = {no: 1};
-    Mongo.find("major_cities", query, columns, order,
+    var options = {sort: "no", limit: this.limit};
+    Mongo.find("major_cities", query, columns, options,
       function(err, major_cities)
       {
         if(err)

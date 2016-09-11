@@ -48,13 +48,13 @@ class Mongo {
     );
   }
 
-  find(collection_name, query, columns, order, callback)
+  find(collection_name, query, columns, options, callback)
   {
     this.query(
       function(db, cb)
       {
         var collection = db.collection(collection_name);
-        collection.find(query, columns).sort(order).toArray(
+        collection.find(query, columns, options).toArray(
           function (err, result)
           {
             cb();
@@ -134,8 +134,8 @@ class Mongo {
           var ObjectId = require('mongodb').ObjectID;
           var query = {"route_id": ObjectId(route._id)};
           var columns = {'lng': true, 'lat': true, '_id':false, 'distance':true};
-          var order = {order_num: 1};
-          self.find(conf.COLLECTION_POINTS, query, columns, order,
+          var options = {sort: "order_num"};
+          self.find(conf.COLLECTION_POINTS, query, columns, options,
             function(err, points)
             {
               console.log(points);
