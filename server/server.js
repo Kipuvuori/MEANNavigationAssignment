@@ -58,22 +58,4 @@ app.get("/major_cities",
   }
 );
 
-app.get("/dijkstra",
-	cors(corsOptions),
-  function(request, response)
-  {
-    response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    Dijkstra.toTwoDimentionalArray(
-      function (data)
-      {
-        data=JSON.stringify(data);
-        response.end(data);
-      }
-    );
-  }
-);
-
-
-
-
 app.listen(conf.PORT_SERVER);
