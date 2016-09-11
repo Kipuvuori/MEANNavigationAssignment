@@ -1,7 +1,9 @@
 var conf = require("./../conf");
 
 var express = require('express');
+var cors = require('cors');
 var app = express();
+
 
 // Traceur for handeling non ECMAScript 6 versions
 var traceur = require('traceur');
@@ -13,13 +15,15 @@ traceur.require.makeDefault(function(file) {
 var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
 
-app.use(function(request, response, next){
-	response.header('Access-Control-Allow-Origin', '*');
-	response.header('Access-Control-Allow-Headers','Content-Type, Authorization');
-	next();
-})
+//Enable CORS for request coming from front end
+var corsOptions = {
+  origin: conf.HOST+":"+conf.PORT_APP,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 
 app.get('/:origin/:destination',
+	cors(corsOptions),
   function(request, response)
   {
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -39,6 +43,7 @@ app.get('/:origin/:destination',
 );
 
 app.get("/major_cities",
+	cors(corsOptions),
   function(request, response)
   {
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -51,4 +56,7 @@ app.get("/major_cities",
     );
   }
 );
+
+
+
 app.listen(conf.PORT_SERVER);

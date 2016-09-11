@@ -1,12 +1,12 @@
-// Define the `phonecatApp` module
-var phonecatApp = angular.module('navigationApp', []);
+var navigationApp = angular.module('navigationApp', []);
 
-// Define the `PhoneListController` controller on the `phonecatApp` module
-phonecatApp.controller('navigationController', function navigationController($scope, $http) {
-  submitQuery(){
-		this.$http({
+
+navigationApp.controller('navigationController', function navigationController($scope, $http) {
+
+  $scope.submitQuery = function() {
+		$http({
 		method: 'GET',
-		url: 'http://192.168.1.148:8000/'+this.origin+'/'+this.destination
+		url: REST + '/'+$scope.origin+'/'+$scope.destination
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
@@ -19,4 +19,6 @@ phonecatApp.controller('navigationController', function navigationController($sc
 			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
 		});
 	}
+
+
 });
