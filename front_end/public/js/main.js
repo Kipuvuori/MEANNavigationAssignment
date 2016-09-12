@@ -20,5 +20,25 @@ navigationApp.controller('navigationController', function navigationController($
 		});
 	}
 
+  var getCities = function() {
+		$http({
+		method: 'GET',
+		url: REST + '/major_cities'
+		}).then(function successCallback(response) {
+		// this callback will be called asynchronously
+		// when the response is available
+    console.log(response.data);//for debug
 
+				$scope.cities = response.data;
+		},
+		function errorCallback(response) {
+		// called asynchronously if an error occurs
+		// or server returns response with an error status.
+			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
+      $scope.cities = null;
+		});
+	}
+
+
+  getCities();
 });
