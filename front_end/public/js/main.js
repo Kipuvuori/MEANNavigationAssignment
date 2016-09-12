@@ -10,7 +10,7 @@ navigationApp.controller('navigationController', function navigationController($
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
-				console.log(response.data);
+				console.log(response.data);//for debug
 				$scope.distance = response.data.distance;
 		},
 		function errorCallback(response) {

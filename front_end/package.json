@@ -23,5 +23,8 @@
     "express": "^4.14.0",
     "serve-static": "^1.11.1",
     "traceur": "0.0.111"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }
