@@ -3,7 +3,7 @@ angular.module('navigationApp').directive('svgMap', ['$compile', function ($comp
         restrict: 'A',
         templateUrl: 'map.svg',
         link: function (scope, element, attrs) {
-
+          
         }
     }
 }]);

@@ -1,0 +1,11 @@
+svg .state:hover , .state.active {
+    cursor: pointer;
+    stroke-width: 4;
+    stroke: #2b542c;
+    fill: #ace63c;
+
+}
+
+.map_outline:hover {
+  fill: #ace63c;
+}
