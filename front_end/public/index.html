@@ -25,9 +25,9 @@
 					<div class="panel-heading">Kaupungit</div>
 					<div class="panel-body">
 						<div  ng-if="cities">
-							<ul class="list-unstyled" ng-repeat="city in cities">
-								<li class="col-xs-6"><button class="btn btn-lg btn-default btn-block">{{city.name}}</button></li>
-							</ul>
+							<div ng-repeat="city in cities">
+								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block">{{city.name}}</button><br></div>
+							</div>
 						</div>
 					</div>
 			</div>
