@@ -14,7 +14,7 @@ traceur.require.makeDefault(function(file) {
 // GoogleAPI class for handeling location requests
 var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
-
+var Dijkstra = require('./Dijkstra');
 
 //Allow all CORS requests
 var corsOptions = {
@@ -33,10 +33,10 @@ app.get('/:origin/:destination',
     var params=request.params;
     console.log(params);
     // Get route data from google and save it to database
-    GoogleAPI.directions(params.origin, params.destination, "json",
-      function(points)
+    Dijkstra.getRoute(params.origin, params.destination,
+      function(route)
       {
-        data=JSON.stringify(points);
+        data=JSON.stringify(route);
         // Output route data
         response.end(data);
       }
@@ -58,7 +58,5 @@ app.get("/major_cities",
     );
   }
 );
-
-
 
 app.listen(conf.PORT_SERVER);

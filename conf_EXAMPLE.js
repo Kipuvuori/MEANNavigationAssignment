@@ -26,3 +26,4 @@ define("PATH_MAJOR_CITIES_JSON", PATH_TO_CSV_FILE_CONTAINING_MAJOR_CITIES);
 
 //one day in milliseconds
 define("MAX_CHACHE_AGE",86400000);
+define("HOST", "http://YOUR_IP_ADDRESS_HERE");
