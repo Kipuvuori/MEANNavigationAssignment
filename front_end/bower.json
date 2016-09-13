@@ -1,0 +1,21 @@
+{
+  "name": "front",
+  "description": "front end for this assingnment",
+  "main": "app.js",
+  "authors": [
+    "Anton Lehmus"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-simple-logger": "git@github.com:nmccready/angular-simple-logger.git#^0.1.7"
+  }
+}

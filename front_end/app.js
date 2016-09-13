@@ -11,7 +11,11 @@ app.use(compression());
 
 // Writing needed info to conf.js file
 var fs = require('fs');
+<<<<<<< HEAD
 fs.writeFile(__dirname + '/public/conf.js', "var REST='" + conf.HOST + ':' + conf.PORT_SERVER + "';", function(err) {
+=======
+fs.writeFile(__dirname + '/public/js/conf.js', "var PORT_SERVER='" + conf.PORT_SERVER + "';", function(err) {
+>>>>>>> interactive_map
     if(err) {
         return console.log(err);
     }

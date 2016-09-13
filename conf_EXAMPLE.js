@@ -24,4 +24,9 @@ define("API_GEOCODING_KEY", GOOGLE_API_KEY_FOR_DIRECTIONS_GEOCODING);
 define("PATH_MAJOR_CITIES_JSON", PATH_TO_CSV_FILE_CONTAINING_MAJOR_CITIES);
 
 
+<<<<<<< HEAD
 define("HOST", "http://YOUR_IP_ADDRESS_HERE");
+=======
+//one day in milliseconds
+define("MAX_CHACHE_AGE",86400000);
+>>>>>>> interactive_map

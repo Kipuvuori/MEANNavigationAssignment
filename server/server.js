@@ -16,9 +16,11 @@ var GoogleAPI = require('./GoogleAPI');
 var MajorCities = require('./MajorCities');
 var Dijkstra = require('./Dijkstra');
 
-//Enable CORS for request coming from front end
+
+//Allow all CORS requests
 var corsOptions = {
-  origin: conf.HOST+":"+conf.PORT_APP,
+  origin:true,
+	maxAge: conf.MAX_CHACHE_AGE,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
