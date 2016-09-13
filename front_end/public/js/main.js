@@ -6,7 +6,7 @@ navigationApp.controller('navigationController', function navigationController($
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
-	angular.extend($scope, {
+	angular.extend($scope,{
 	    center: {
 	        lat: 62.2426,
 	        lng: 25.7473,
@@ -16,14 +16,19 @@ navigationApp.controller('navigationController', function navigationController($
 			defaults: {
 			minZoom: 4,
 			maxZoom: 8,
-			 path: {
-					 weight: 10,
-					 color: '#800000',
-					 opacity: 1
-			 }
+			path: {
+				weight: 8,
+				color: '#ff0000',
+				opacity: 1
+			 },
+		 },
+		 routePaths:{
+			 main_path:{
+			 color: 'red',
+			 latlngs: []
+		 },
 	 }
 	});
-
 
 	/*
 	*Query back end for distance between cities
@@ -38,6 +43,11 @@ navigationApp.controller('navigationController', function navigationController($
 
 			//set result
 			$scope.distance = response.data.distance;
+
+			//add path to map
+			angular.forEach(response.data.points, function(point) {
+				$scope.routePaths.main_path.latlngs.push({lat: point.lat, lng: point.lng});
+			});
 
 			//save queried origin and destination
 			$scope.origin = $scope.query_origin;
