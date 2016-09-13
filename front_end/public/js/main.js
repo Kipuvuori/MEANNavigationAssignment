@@ -23,11 +23,7 @@ navigationApp.controller('navigationController', function navigationController($
 			 },
 		 },
 		 routePaths:{
-			 main_path:{
-			 color: 'red',
-			 latlngs: []
-		 },
-	 }
+	 		}
 	});
 
 	/*
@@ -44,10 +40,21 @@ navigationApp.controller('navigationController', function navigationController($
 			//set result
 			$scope.distance = response.data.distance;
 
+			//reset last route
+			$scope.routePaths = {
+				main_path:{
+					message: "<h3>"+$scope.query_origin+" - "+ $scope.query_destination+"</h3><p>Etäisyys: "+$scope.distance/1000+"km</p>",
+					latlngs: []
+				}
+			};
+
 			//add path to map
 			angular.forEach(response.data.points, function(point) {
 				$scope.routePaths.main_path.latlngs.push({lat: point.lat, lng: point.lng});
 			});
+
+
+
 
 			//save queried origin and destination
 			$scope.origin = $scope.query_origin;
