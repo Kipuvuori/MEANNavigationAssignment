@@ -16,19 +16,11 @@
 <body ng-controller="navigationController">
 	<div class="container">
 
-		<div class="col-md-7">
-			<div svg-map></div>
-		</div>
-
-		<div class="col-md-5 col-sm-6">
-			<div class="panel panel-primary">
-					<div class="panel-heading">Kaupungit</div>
+		<div class="col-xs-12">
+			<div class="panel panel-success" ng-if="distance">
+					<div class="panel-heading">Etäisyys</div>
 					<div class="panel-body">
-						<div  ng-if="cities">
-							<div ng-repeat="city in cities">
-								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block">{{city.name}}</button><br></div>
-							</div>
-						</div>
+						{{distance /1000}} km
 					</div>
 			</div>
 		</div>
@@ -56,19 +48,29 @@
 	  	</div>
 		</div>
 
-		<div class="col-xs-12">
-	  	<div class="panel panel-success" ng-if="distance">
-	  			<div class="panel-heading">Etäisyys</div>
-	  			<div class="panel-body">
-	  				{{distance /1000}} km
-	  			</div>
-	  	</div>
+		<div class="col-md-5 col-sm-6">
+			<div class="panel panel-primary">
+					<div class="panel-heading">Kaupungit</div>
+					<div class="panel-body">
+						<div  ng-if="cities">
+							<div ng-repeat="city in cities">
+								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block">{{city.name}}</button><br></div>
+							</div>
+						</div>
+					</div>
+			</div>
 		</div>
+
+		<div class="col-md-7">
+			<div svg-map></div>
+		</div>
+
 
 
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 	<script src="js/conf.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/directives.js"></script>

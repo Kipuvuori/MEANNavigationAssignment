@@ -1,12 +1,12 @@
 var navigationApp = angular.module('navigationApp', []);
 
 
-navigationApp.controller('navigationController', function navigationController($scope, $http) {
+navigationApp.controller('navigationController', function navigationController($scope, $http, $log, $location) {
 
   $scope.submitQuery = function() {
 		$http({
 		method: 'GET',
-		url: REST + '/'+$scope.origin+'/'+$scope.destination
+		url: $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER + '/'+$scope.origin+'/'+$scope.destination
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
@@ -23,7 +23,7 @@ navigationApp.controller('navigationController', function navigationController($
   var getCities = function() {
 		$http({
 		method: 'GET',
-		url: REST + '/major_cities'
+		url: $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER + '/major_cities'
 		}).then(function successCallback(response) {
 		// this callback will be called asynchronously
 		// when the response is available
@@ -36,6 +36,7 @@ navigationApp.controller('navigationController', function navigationController($
 		// or server returns response with an error status.
 			console.log('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
       $scope.cities = null;
+
 		});
 	}
 
