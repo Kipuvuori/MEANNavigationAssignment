@@ -20,12 +20,12 @@
 			<div class="panel panel-success" ng-if="distance">
 					<div class="panel-heading">Etäisyys</div>
 					<div class="panel-body">
-						{{distance /1000}} km
+						{{origin}} - {{destination}} välinen etäisyys on {{distance /1000}} km
 					</div>
 			</div>
 		</div>
 
-		<div class="col-md-7 col-sm-6">
+		<div class="col-xs-12">
 	  	<div class="panel panel-primary">
 	  			<div class="panel-heading">Hae reittiä</div>
 	  			<div class="panel-body">
@@ -33,11 +33,11 @@
 	  					<div class="input-group">
 	  						<label class="control-label col-md-2" for="origin">Lähtö:</label>
 	  						 <div class="col-md-10">
-									 <input type="text" class="form-control" id="origin" placeholder="Lähtö kaupunki" ng-model="origin" required>
+									 <input type="text" class="form-control" id="origin" placeholder="Lähtö kaupunki" ng-model="query_origin" required>
 	  						 </div>
 	  						 <label class="control-label col-md-2" for="destination">Määränpää:</label>
 	   						 <div class="col-md-10">
-	   							 <input type="text" class="form-control" id="destination" placeholder="Määränpää kaupunki" ng-model="destination" required>
+	   							 <input type="text" class="form-control" id="destination" placeholder="Määränpää kaupunki" ng-model="query_destination" required>
 	   						 </div>
 								 <div class="col-xs-12">
 	  						 	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span> Hae</button>
@@ -48,22 +48,23 @@
 	  	</div>
 		</div>
 
+		<div class="col-md-7">
+			<div svg-map></div>
+		</div>
+
 		<div class="col-md-5 col-sm-6">
 			<div class="panel panel-primary">
 					<div class="panel-heading">Kaupungit</div>
 					<div class="panel-body">
 						<div  ng-if="cities">
 							<div ng-repeat="city in cities">
-								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block">{{city.name}}</button><br></div>
+								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block" ng-click="cityBtnClick(city.name)">{{city.name}}</button><br></div>
 							</div>
 						</div>
 					</div>
 			</div>
 		</div>
 
-		<div class="col-md-7">
-			<div svg-map></div>
-		</div>
 
 
 
