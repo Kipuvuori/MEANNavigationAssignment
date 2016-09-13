@@ -1,9 +1,29 @@
 var navigationApp = angular.module('navigationApp', ['nemLogging','ui-leaflet']);
 
 
+
 navigationApp.controller('navigationController', function navigationController($scope, $http, $log, $location) {
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
+
+	angular.extend($scope, {
+	    center: {
+	        lat: 62.2426,
+	        lng: 25.7473,
+	        zoom: 5,
+
+	    },
+			defaults: {
+			minZoom: 4,
+			maxZoom: 8,
+			 path: {
+					 weight: 10,
+					 color: '#800000',
+					 opacity: 1
+			 }
+	 }
+	});
+
 
 	/*
 	*Query back end for distance between cities

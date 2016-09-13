@@ -10,6 +10,7 @@ gulp.task('default', function () {
 
 gulp.task('copy', function() {
     gulp.src(['bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
-		'node_modules/ui-leaflet/dist/ui-leaflet.min.js'])
+		'node_modules/ui-leaflet/dist/ui-leaflet.min.js',
+		'node_modules/ui-leaflet-draw/dist/ui-leaflet-draw.js'])
         .pipe(gulp.dest('public/js/'))
 });
