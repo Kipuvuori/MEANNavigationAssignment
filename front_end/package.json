@@ -19,12 +19,15 @@
   "homepage": "https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment#readme",
   "dependencies": {
     "angular": "^1.5.8",
+    "bower": "^1.7.9",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "serve-static": "^1.11.1",
-    "traceur": "0.0.111"
+    "traceur": "0.0.111",
+    "ui-leaflet": "^1.0.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-google-cdn": "^2.1.0"
   }
 }
