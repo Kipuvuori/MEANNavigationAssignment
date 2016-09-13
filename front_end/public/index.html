@@ -20,7 +20,7 @@
 			<div class="panel panel-success" ng-if="distance">
 					<div class="panel-heading">Etäisyys</div>
 					<div class="panel-body">
-						{{origin}} - {{destination}} välinen etäisyys on {{distance /1000}} km
+						{{origin}} - {{destination}} välinen etäisyys on {{(distance /1000| number:0)}}km
 					</div>
 			</div>
 		</div>
