@@ -6,6 +6,15 @@ navigationApp.controller('navigationController', function navigationController($
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
+	$scope.mainMarker = {
+	lat: 0,
+	lng: 0,
+	focus: true,
+	message: "This is default message. You shouldn't see this",
+	draggable: false
+	};
+
+
 	//initialize leaflet map
 	angular.extend($scope,{
 	    center: {
@@ -17,11 +26,13 @@ navigationApp.controller('navigationController', function navigationController($
 			minZoom: 4,
 			maxZoom: 8,
 			path: {
-				weight: 12
-				color: '#ff0000',
+				weight: 12,
+				color: '#23De23',
 				opacity: 0.7
 			 },
 		 },
+		 markers:{
+    },
 		 routePaths:{
 	 		}
 	});
@@ -48,13 +59,13 @@ navigationApp.controller('navigationController', function navigationController($
 				}
 			};
 
-			//add path to map
 			angular.forEach(response.data.points, function(point) {
+				//add path to map
 				$scope.routePaths.main_path.latlngs.push({lat: point.lat, lng: point.lng});
+
+				//crate markers
+				createMarker(point.lat,point.lng,point.name,point.distance);
 			});
-
-
-
 
 			//save queried origin and destination
 			$scope.origin = $scope.query_origin;
@@ -62,6 +73,7 @@ navigationApp.controller('navigationController', function navigationController($
 			//initalize query variables for new query
 			$scope.query_origin = null;
 			$scope.query_destination = null;
+
 		},
 		function errorCallback(response) {
 			$log.error('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
@@ -101,6 +113,15 @@ navigationApp.controller('navigationController', function navigationController($
 			$scope.query_destination = cityName;
 			$scope.submitQuery();
 		}
+	}
+
+	var createMarker = function(lat,lng,name,dist){
+		var marker = angular.copy($scope.mainMarker);
+		marker.lat = lat;
+		marker.lng = lng;
+		marker.message = name+" "+dist;
+		$scope.markers[$scope.markers.length]=marker;
+		$log.debug($scope.markers);
 	}
 
 
