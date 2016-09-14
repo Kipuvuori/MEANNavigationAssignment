@@ -6,6 +6,7 @@ navigationApp.controller('navigationController', function navigationController($
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
+	//default marker
 	$scope.mainMarker = {
 	lat: 0,
 	lng: 0,
@@ -46,7 +47,8 @@ navigationApp.controller('navigationController', function navigationController($
 		method: 'GET',
 		url: BASE_URL + '/'+$scope.query_origin+'/'+$scope.query_destination
 		}).then(function successCallback(response) {
-			$log.debug("response"+response.data);//for debug
+			$log.debug("response:");//for debug
+			$log.debug(response.data);//for debug
 
 			//set result
 			$scope.distance = response.data.distance;
@@ -63,7 +65,7 @@ navigationApp.controller('navigationController', function navigationController($
 				//add path to map
 				$scope.routePaths.main_path.latlngs.push({lat: point.lat, lng: point.lng});
 
-				//crate markers
+				//crate marker for node
 				createMarker(point.lat,point.lng,point.name,point.distance);
 			});
 
@@ -115,15 +117,20 @@ navigationApp.controller('navigationController', function navigationController($
 		}
 	}
 
+	/*
+	*Create new marker and add it to markers object
+	*
+	*@paramn double lat, double lng, string name, double dist
+	*/
 	var createMarker = function(lat,lng,name,dist){
 		var marker = angular.copy($scope.mainMarker);
 		marker.lat = lat;
 		marker.lng = lng;
 		marker.message = name+" "+dist;
 		$scope.markers[name] = marker;
-		$log.debug("Markers:"+$scope.markers);
 	}
 
 
+	//get available cities on app start
   getCities();
 });
