@@ -46,7 +46,7 @@ navigationApp.controller('navigationController', function navigationController($
 		method: 'GET',
 		url: BASE_URL + '/'+$scope.query_origin+'/'+$scope.query_destination
 		}).then(function successCallback(response) {
-			$log.debug(response.data);//for debug
+			$log.debug("response"+response.data);//for debug
 
 			//set result
 			$scope.distance = response.data.distance;
@@ -120,8 +120,8 @@ navigationApp.controller('navigationController', function navigationController($
 		marker.lat = lat;
 		marker.lng = lng;
 		marker.message = name+" "+dist;
-		$scope.markers[$scope.markers.length]=marker;
-		$log.debug($scope.markers);
+		$scope.markers[name] = marker;
+		$log.debug("Markers:"+$scope.markers);
 	}
 
 
