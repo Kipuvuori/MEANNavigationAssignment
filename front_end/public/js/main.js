@@ -24,8 +24,8 @@ navigationApp.controller('navigationController', function navigationController($
 	        zoom: 5,
 	    },
 			defaults: {
-			minZoom: 4,
-			maxZoom: 8,
+			minZoom: 5,
+			maxZoom: 10,
 			path: {
 				weight: 12,
 				color: '#23De23',
@@ -126,7 +126,7 @@ navigationApp.controller('navigationController', function navigationController($
 		var marker = angular.copy($scope.mainMarker);
 		marker.lat = lat;
 		marker.lng = lng;
-		marker.message = name+" "+dist;
+		marker.message = name+" "+Math.round(dist/1000,2)+"km";
 		$scope.markers[name] = marker;
 	}
 
