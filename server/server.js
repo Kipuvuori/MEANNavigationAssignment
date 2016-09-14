@@ -3,6 +3,7 @@ var conf = require("./../conf");
 var express = require('express');
 var cors = require('cors');
 var app = express();
+var apicache = require('apicache').options({ debug: false }).middleware;
 
 
 // Traceur for handeling non ECMAScript 6 versions
@@ -45,7 +46,7 @@ app.get('/:origin/:destination',
 );
 
 app.get("/major_cities",
-	cors(corsOptions),
+	cors(corsOptions), apicache('5 minutes'),
   function(request, response)
   {
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });

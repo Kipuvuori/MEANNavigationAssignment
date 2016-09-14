@@ -5,11 +5,22 @@ class Tools {
   isEmpty(obj) {
       if (obj == null) return true;
       if (typeof obj == "undefined") return true;
-      if (obj.length > 0)    return false;
-      if (obj.length === 0)  return true;
-      if (typeof obj !== "object") return true;
-      for (var key in obj) {
-          if (hasOwnProperty.call(obj, key)) return false;
+      if (!obj) return true;
+      if(obj instanceof Array || obj instanceof Object || obj instanceof String)
+      {
+        if (obj.length > 0)    return false;
+        if (obj.length === 0)  return true;
+      }
+      else {
+        if (obj.toString().length > 0)    return false;
+        if (obj.toString().length === 0)  return true;
+      }
+      
+      if (typeof obj === "object")
+      {
+        for (var key in obj) {
+            if (hasOwnProperty.call(obj, key)) return false;
+        }
       }
       return true;
   }

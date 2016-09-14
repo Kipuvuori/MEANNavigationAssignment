@@ -31,9 +31,11 @@ class Dijkstra {
                 for(var i = 0; i < fastest_route.points.length; ++i)
                 {
                   var name = fastest_route.points[i];
-                  var point = major_cities.filter(function( obj ) {
-                    return obj.name == name;
-                  })[0];
+                  var points = major_cities.filter(function( obj ) {
+                    console.log(major_cities);
+                    return (obj["name"].toLowerCase() == name.toLowerCase());
+                  });
+                  var point = (tools.isEmpty(points)) ? null : points[0];
                   if(tools.isEmpty(point))
                   {
                     point = {name: name, lat: 0, lng: 0};
@@ -42,8 +44,12 @@ class Dijkstra {
                     delete point._id;
                     delete point.no;
                   }
-                  var distance = nodes[prev_name][name];
-                  if(tools.isEmpty(distance)) distance = 0;
+                  if(tools.isEmpty(nodes) || tools.isEmpty(nodes[prev_name]) ||
+                    tools.isEmpty(nodes[prev_name][name]))
+                  {
+                    distance = 0;
+                  }
+                  else var distance = nodes[prev_name][name];
                   point.distance = distance;
                   fastest_route.points[i] = point;
                   prev_name = name;
