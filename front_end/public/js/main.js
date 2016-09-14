@@ -6,20 +6,20 @@ navigationApp.controller('navigationController', function navigationController($
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
+	//initialize leaflet map
 	angular.extend($scope,{
 	    center: {
 	        lat: 62.2426,
 	        lng: 25.7473,
 	        zoom: 5,
-
 	    },
 			defaults: {
 			minZoom: 4,
 			maxZoom: 8,
 			path: {
-				weight: 8,
+				weight: 12
 				color: '#ff0000',
-				opacity: 1
+				opacity: 0.7
 			 },
 		 },
 		 routePaths:{
