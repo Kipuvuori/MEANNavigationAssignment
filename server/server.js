@@ -32,7 +32,6 @@ app.get('/:origin/:destination',
     response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     // Get parameters from url
     var params=request.params;
-    console.log(params);
     // Get route data from google and save it to database
     Dijkstra.getRoute(params.origin, params.destination,
       function(route)

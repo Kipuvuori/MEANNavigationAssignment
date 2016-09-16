@@ -122,7 +122,6 @@ class Mongo {
     this.findOne(conf.COLLECTION_ROUTES, route,
       function(err, route)
       {
-        console.log(route);
         // Handle error
         if (err)
         {
@@ -138,7 +137,6 @@ class Mongo {
           self.find(conf.COLLECTION_POINTS, query, columns, options,
             function(err, points)
             {
-              console.log(points);
               if (err)
               {
                 console.log(err);

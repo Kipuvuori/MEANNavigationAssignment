@@ -32,7 +32,6 @@ class Dijkstra {
                 {
                   var name = fastest_route.points[i];
                   var points = major_cities.filter(function( obj ) {
-                    console.log(major_cities);
                     return (obj["name"].toLowerCase() == name.toLowerCase());
                   });
                   var point = (tools.isEmpty(points)) ? null : points[0];

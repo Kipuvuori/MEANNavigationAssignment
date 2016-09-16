@@ -21,7 +21,6 @@ class GoogleAPI {
         {
           // Make url for request
           url=encodeURI(url);
-          console.log(url);
           var data="";
           https.get(url,
             (response) =>
@@ -81,7 +80,6 @@ class GoogleAPI {
     // Make url for request
     var url=this.BASE_URL+"geocode/"+data_type+"?address="+address+"&key="+conf.API_GEOCODING_KEY;
     url=encodeURI(url);
-    console.log(url);
 
     var data="";
     https.get(url,

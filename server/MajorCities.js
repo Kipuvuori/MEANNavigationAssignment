@@ -41,7 +41,6 @@ class MajorCities {
                   city.lat = lat;
                   city.lng = lng;
                   major_cities.push(city);
-                  console.log(city);
                 }
                 else
                 {
