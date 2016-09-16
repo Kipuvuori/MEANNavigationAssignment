@@ -43,6 +43,10 @@ navigationApp.controller('navigationController', function navigationController($
 	*Set $scope.distance to query result.
 	*/
   $scope.submitQuery = function() {
+
+		//empty markers
+		$scope.markers = {};
+
 		$http({
 		method: 'GET',
 		url: BASE_URL + '/'+$scope.query_origin+'/'+$scope.query_destination
