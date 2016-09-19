@@ -12,9 +12,20 @@ navigationApp.controller('navigationController', function navigationController($
 	lng: 0,
 	focus: true,
 	message: "This is default message. You shouldn't see this",
-	draggable: false
+	draggable: false,
+	icon: {}
 	};
 
+
+	var icons = {
+		blue: {
+			type: 'div',
+			iconSize: [12, 12],
+			className: 'blue',
+			iconAnchor:  [6, 6]
+		},
+
+	}
 
 	//initialize leaflet map
 	angular.extend($scope,{
@@ -35,7 +46,12 @@ navigationApp.controller('navigationController', function navigationController($
 		 markers:{
     },
 		 routePaths:{
-	 		}
+		 },
+		 awesomeMarkerIcon: {
+			 type: 'awesomeMarker',
+			 icon: 'tag',
+			 markerColor: 'red'
+		 },
 	});
 
 	/*
@@ -81,6 +97,7 @@ navigationApp.controller('navigationController', function navigationController($
 			$scope.query_destination = null;
 
 		},
+
 		function errorCallback(response) {
 			$log.error('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
 		});
@@ -97,6 +114,7 @@ navigationApp.controller('navigationController', function navigationController($
 		}).then(function successCallback(response) {
     	$log.debug(response.data);//for debug
 			$scope.cities = response.data;
+			createCityMarkers();
 		},
 		function errorCallback(response) {
 			$log.error('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
@@ -132,6 +150,24 @@ navigationApp.controller('navigationController', function navigationController($
 		marker.lng = lng;
 		marker.message = name+" "+Math.round(dist/1000,2)+"km";
 		$scope.markers[name] = marker;
+	}
+
+	/*
+	*Create markers for each city
+	*
+	*/
+	var createCityMarkers = function(){
+		angular.forEach($scope.cities, function(city) {
+			var marker = angular.copy($scope.mainMarker);
+			marker.lat = city.lat;
+			marker.lng = city.lng;
+			marker.message = city.name;
+
+			marker.icon = $scope.awesomeMarkerIcon;
+			marker.icon.icon='star';
+
+			$scope.markers[name] = marker;
+		});
 	}
 
 
