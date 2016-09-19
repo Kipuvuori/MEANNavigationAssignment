@@ -10,4 +10,4 @@ Draw route on map and show info about in when clicked on. Map and routes is draw
 ## Deploying
  * ``` npm install ```
  *  ``` bower install ```
- *  ``` gulp --production ```
+ *  ``` gulp copy```
