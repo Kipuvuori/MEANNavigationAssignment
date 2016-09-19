@@ -7,12 +7,22 @@ navigationApp.controller('navigationController', function navigationController($
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
 	//default marker
-	$scope.mainMarker = {
+	$scope.routeMarker = {
 	lat: 0,
 	lng: 0,
 	focus: true,
 	message: "This is default message. You shouldn't see this",
 	draggable: false,
+	};
+
+	//default marker
+	$scope.cityMarker = {
+	lat: 0,
+	lng: 0,
+	focus: false,
+	message: "This is default message. You shouldn't see this",
+	draggable: false,
+	opacity: 0.8,
 	icon: {}
 	};
 
@@ -145,7 +155,7 @@ navigationApp.controller('navigationController', function navigationController($
 	*@paramn double lat, double lng, string name, double dist
 	*/
 	var createMarker = function(lat,lng,name,dist){
-		var marker = angular.copy($scope.mainMarker);
+		var marker = angular.copy($scope.cityMarker);
 		marker.lat = lat;
 		marker.lng = lng;
 		marker.message = name+" "+Math.round(dist/1000,2)+"km";
@@ -158,7 +168,7 @@ navigationApp.controller('navigationController', function navigationController($
 	*/
 	var createCityMarkers = function(){
 		angular.forEach($scope.cities, function(city) {
-			var marker = angular.copy($scope.mainMarker);
+			var marker = angular.copy($scope.cityMarker);
 			marker.lat = city.lat;
 			marker.lng = city.lng;
 			marker.message = city.name;
@@ -171,6 +181,11 @@ navigationApp.controller('navigationController', function navigationController($
 
 		});
 	}
+
+	$scope.$on('leafletDirectiveMarker.click', function(e, args) {
+    // Args will contain the marker name and other relevant information
+    console.log("Leaflet Click");
+});
 
 
 	//get available cities on app start
