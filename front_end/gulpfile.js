@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var googlecdn = require('gulp-google-cdn');
 
+
 gulp.task('default', function () {
 	//TODO minify and combine js & css for production
     return gulp.src('./public/index.html')
@@ -16,6 +17,7 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('public/js/'))
 
     gulp.src([
+    'node_modules/leaflet/dist/leaflet.css',
     'node_modules/drmonty-leaflet-awesome-markers/css/**'])
     .pipe(gulp.dest('public/css/'))
 });

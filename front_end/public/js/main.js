@@ -184,6 +184,7 @@ navigationApp.controller('navigationController', function navigationController($
 	*
 	*/
 	$scope.$on('leafletDirectiveMarker.click', function(e, args) {
+		//don't register click when route is drawn
 		if($scope.distance === null)
 		{
 			$scope.cityBtnClick(args.modelName);
