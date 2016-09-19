@@ -9,8 +9,10 @@
   <!-- Latest compiled and minified Twitter Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
+
+	<link rel="stylesheet" href="/css/leaflet.css">
 	<link rel="stylesheet" href="/css/lavish-bootstrap.css">
+	<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
 
 </head>
 <body ng-controller="navigationController">
@@ -21,6 +23,8 @@
 					<div class="panel-heading">Etäisyys</div>
 					<div class="panel-body">
 						{{origin}} - {{destination}} välinen etäisyys on {{(distance /1000| number:0)}}km
+						<button  class="btn btn-lg btn-info pull-right" ng-click="clearRoute()"><span calss="glyphicon glyphicon-remove"></span> Tyhjää reitti</button>
+
 					</div>
 			</div>
 		</div>
@@ -74,6 +78,7 @@
 	<script src="js/angular-simple-logger.min.js"></script>
 	<script src="js/ui-leaflet.min.js"></script>
 	<script src="js/ui-leaflet-draw.js"></script>
+	<script src="js/leaflet.awesome-markers.min.js"></script>
 	<script src="js/conf.js"></script>
 	<script src="js/main.js"></script>
 

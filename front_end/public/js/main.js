@@ -7,14 +7,34 @@ navigationApp.controller('navigationController', function navigationController($
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
 	//default marker
-	$scope.mainMarker = {
+	$scope.routeMarker = {
 	lat: 0,
 	lng: 0,
 	focus: true,
 	message: "This is default message. You shouldn't see this",
-	draggable: false
+	draggable: false,
 	};
 
+	//default marker
+	$scope.cityMarker = {
+	lat: 0,
+	lng: 0,
+	focus: false,
+	message: "This is default message. You shouldn't see this",
+	draggable: false,
+	opacity: 0.8,
+	icon: {}
+	};
+
+
+	var icons = {
+		blue: {
+			type: 'div',
+			iconSize: [12, 12],
+			className: 'blue',
+			iconAnchor:  [6, 6]
+		},
+	}
 
 	//initialize leaflet map
 	angular.extend($scope,{
@@ -24,8 +44,8 @@ navigationApp.controller('navigationController', function navigationController($
 	        zoom: 5,
 	    },
 			defaults: {
-			minZoom: 4,
-			maxZoom: 8,
+			minZoom: 5,
+			maxZoom: 10,
 			path: {
 				weight: 12,
 				color: '#23De23',
@@ -35,7 +55,12 @@ navigationApp.controller('navigationController', function navigationController($
 		 markers:{
     },
 		 routePaths:{
-	 		}
+		 },
+		 awesomeMarkerIcon: {
+			 type: 'awesomeMarker',
+			 icon: 'tag',
+			 markerColor: 'red'
+		 },
 	});
 
 	/*
@@ -43,17 +68,18 @@ navigationApp.controller('navigationController', function navigationController($
 	*Set $scope.distance to query result.
 	*/
   $scope.submitQuery = function() {
+
+		$scope.markers = {};
+
 		$http({
 		method: 'GET',
 		url: BASE_URL + '/'+$scope.query_origin+'/'+$scope.query_destination
 		}).then(function successCallback(response) {
-			$log.debug("response:");//for debug
-			$log.debug(response.data);//for debug
 
 			//set result
 			$scope.distance = response.data.distance;
 
-			//reset last route
+			//set route message
 			$scope.routePaths = {
 				main_path:{
 					message: "<h3>"+$scope.query_origin+" - "+ $scope.query_destination+"</h3><p>Etäisyys: "+$scope.distance/1000+"km</p>",
@@ -77,6 +103,7 @@ navigationApp.controller('navigationController', function navigationController($
 			$scope.query_destination = null;
 
 		},
+
 		function errorCallback(response) {
 			$log.error('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
 		});
@@ -93,6 +120,7 @@ navigationApp.controller('navigationController', function navigationController($
 		}).then(function successCallback(response) {
     	$log.debug(response.data);//for debug
 			$scope.cities = response.data;
+			createCityMarkers();
 		},
 		function errorCallback(response) {
 			$log.error('error:  '+response.status+'('+response.statusText+')'+' '+response.data);
@@ -113,6 +141,7 @@ navigationApp.controller('navigationController', function navigationController($
 		else if($scope.query_destination == null && $scope.query_origin != cityName)
 		{
 			$scope.query_destination = cityName;
+			$scope.markers = {}; //remove cityMarkers
 			$scope.submitQuery();
 		}
 	}
@@ -123,14 +152,60 @@ navigationApp.controller('navigationController', function navigationController($
 	*@paramn double lat, double lng, string name, double dist
 	*/
 	var createMarker = function(lat,lng,name,dist){
-		var marker = angular.copy($scope.mainMarker);
+		var marker = angular.copy($scope.cityMarker);
 		marker.lat = lat;
 		marker.lng = lng;
-		marker.message = name+" "+dist;
+		marker.message = name+" "+Math.round(dist/1000,2)+"km";
 		$scope.markers[name] = marker;
 	}
 
+	/*
+	*Create markers for each city
+	*
+	*/
+	var createCityMarkers = function(){
+		angular.forEach($scope.cities, function(city) {
+			var marker = angular.copy($scope.cityMarker);
+			marker.lat = city.lat;
+			marker.lng = city.lng;
+			marker.message = city.name;
+			marker.focus = false;
+
+			marker.icon = $scope.awesomeMarkerIcon;
+			marker.icon.icon='glyphicon glyphicon-road';
+
+			$scope.markers[city.name] = marker;
+		});
+	}
+
+	/*
+	* On marker click
+	* add city name to query
+	*
+	*/
+	$scope.$on('leafletDirectiveMarker.click', function(e, args) {
+		//don't register click when route is drawn
+		if($scope.distance === null)
+		{
+			$scope.cityBtnClick(args.modelName);
+		}
+	});
+
+
+	/*
+	* Clear route and markers related to it
+	*
+	*/
+	$scope.clearRoute = function(){
+		$scope.markers = {};
+		$scope.routePaths = {};
+
+		$scope.distance = null;
+
+		createCityMarkers();
+	}
 
 	//get available cities on app start
   getCities();
+	$scope.distance = null;
 });
