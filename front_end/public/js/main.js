@@ -70,7 +70,7 @@ navigationApp.controller('navigationController', function navigationController($
 	*/
   $scope.submitQuery = function() {
 
-		$scope.clearRoute();
+		$scope.markers = {};
 
 		$http({
 		method: 'GET',
@@ -142,6 +142,7 @@ navigationApp.controller('navigationController', function navigationController($
 		else if($scope.query_destination == null && $scope.query_origin != cityName)
 		{
 			$scope.query_destination = cityName;
+			$scope.markers = {}; //remove cityMarkers
 			$scope.submitQuery();
 		}
 	}
@@ -175,7 +176,6 @@ navigationApp.controller('navigationController', function navigationController($
 			marker.icon.icon='glyphicon glyphicon-road';
 
 			$scope.markers[city.name] = marker;
-
 		});
 	}
 
@@ -196,6 +196,8 @@ navigationApp.controller('navigationController', function navigationController($
 	$scope.clearRoute = function(){
 		$scope.markers = {};
 		$scope.routePaths = {};
+
+		$scope.distance = null;
 
 		createCityMarkers();
 	}
