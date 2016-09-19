@@ -16,7 +16,6 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('public/js/'))
 
     gulp.src([
-    'node_modules/drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css',
-    'node_modules/drmonty-leaflet-awesome-markers/css/images'])
-    .pipe(gulp.dest('public/cdd/'))
+    'node_modules/drmonty-leaflet-awesome-markers/css/**'])
+    .pipe(gulp.dest('public/css/'))
 });

@@ -162,11 +162,13 @@ navigationApp.controller('navigationController', function navigationController($
 			marker.lat = city.lat;
 			marker.lng = city.lng;
 			marker.message = city.name;
+			marker.focus = false;
 
 			marker.icon = $scope.awesomeMarkerIcon;
-			marker.icon.icon='star';
+			marker.icon.icon='glyphicon glyphicon-road';
 
-			$scope.markers[name] = marker;
+			$scope.markers[city.name] = marker;
+
 		});
 	}
 
