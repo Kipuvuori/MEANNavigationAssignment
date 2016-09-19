@@ -34,7 +34,6 @@ navigationApp.controller('navigationController', function navigationController($
 			className: 'blue',
 			iconAnchor:  [6, 6]
 		},
-
 	}
 
 	//initialize leaflet map
@@ -185,7 +184,10 @@ navigationApp.controller('navigationController', function navigationController($
 	*
 	*/
 	$scope.$on('leafletDirectiveMarker.click', function(e, args) {
-		$scope.cityBtnClick(args.modelName);
+		if($scope.distance === null)
+		{
+			$scope.cityBtnClick(args.modelName);
+		}
 	});
 
 
@@ -204,4 +206,5 @@ navigationApp.controller('navigationController', function navigationController($
 
 	//get available cities on app start
   getCities();
+	$scope.distance = null;
 });
