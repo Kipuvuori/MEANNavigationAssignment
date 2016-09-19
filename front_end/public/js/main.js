@@ -70,20 +70,17 @@ navigationApp.controller('navigationController', function navigationController($
 	*/
   $scope.submitQuery = function() {
 
-		//empty markers
-		$scope.markers = {};
+		$scope.clearRoute();
 
 		$http({
 		method: 'GET',
 		url: BASE_URL + '/'+$scope.query_origin+'/'+$scope.query_destination
 		}).then(function successCallback(response) {
-			$log.debug("response:");//for debug
-			$log.debug(response.data);//for debug
 
 			//set result
 			$scope.distance = response.data.distance;
 
-			//reset last route
+			//set route message
 			$scope.routePaths = {
 				main_path:{
 					message: "<h3>"+$scope.query_origin+" - "+ $scope.query_destination+"</h3><p>Etäisyys: "+$scope.distance/1000+"km</p>",
@@ -182,11 +179,26 @@ navigationApp.controller('navigationController', function navigationController($
 		});
 	}
 
+	/*
+	* On marker click
+	* add city name to query
+	*
+	*/
 	$scope.$on('leafletDirectiveMarker.click', function(e, args) {
-    // Args will contain the marker name and other relevant information
-    console.log("Leaflet Click");
-});
+		$scope.cityBtnClick(args.modelName);
+	});
 
+
+	/*
+	* Clear route and markers related to it
+	*
+	*/
+	$scope.clearRoute = function(){
+		$scope.markers = {};
+		$scope.routePaths = {};
+
+		createCityMarkers();
+	}
 
 	//get available cities on app start
   getCities();
