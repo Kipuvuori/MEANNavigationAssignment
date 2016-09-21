@@ -18,7 +18,7 @@
 <body ng-controller="navigationController">
 	<div class="container">
 
-		<div class="col-xs-12">
+		<div class="row">
 			<div class="panel panel-success" ng-if="distance">
 					<div class="panel-heading">Etäisyys</div>
 					<div class="panel-body">
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12">
+		<div class="row">
 	  	<div class="panel panel-primary">
 	  			<div class="panel-heading">Hae reittiä</div>
 	  			<div class="panel-body">
@@ -52,22 +52,28 @@
 	  	</div>
 		</div>
 
-		<div class="col-md-7">
+		<div class="row">
 			<leaflet defaults="defaults" paths="routePaths" markers="markers" lf-center="center" height="960px" width="100%"></leaflet>
 		</div>
 
-		<div class="col-md-5 col-sm-6">
+		<div class="row">
+			<br>
+		</div>
+
+		<div class="row">
 			<div class="panel panel-primary">
 					<div class="panel-heading">Kaupungit</div>
 					<div class="panel-body">
 						<div  ng-if="cities">
 							<div ng-repeat="city in cities">
-								<div class="col-xs-6"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block" ng-click="cityBtnClick(city.name)">{{city.name}}</button><br></div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><button id="{{city._id}}" class="btn btn-lg btn-default btn-block" ng-click="cityBtnClick(city.name)">{{city.name}}</button><br></div>
 							</div>
 						</div>
 					</div>
 			</div>
 		</div>
+
+
   </div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>

@@ -11,3 +11,6 @@ Draw route on map and show info about in when clicked on. Map and routes is draw
  * ``` npm install ```
  *  ``` bower install ```
  *  ``` gulp copy```
+
+
+ Maps privided by OpenStreetmap. [Lisence](https://www.openstreetmap.org/copyright).
