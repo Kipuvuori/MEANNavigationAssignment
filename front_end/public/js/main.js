@@ -2,7 +2,7 @@ var navigationApp = angular.module('navigationApp', ['nemLogging','ui-leaflet'])
 
 
 
-navigationApp.controller('navigationController', function navigationController($scope, $http, $log, $location) {
+navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$location','leafletData', function navigationController($scope, $http, $log, $location, leafletData) {
 
 	var BASE_URL = $location.protocol() + "://" + $location.host() + ":" + PORT_SERVER ;
 
@@ -46,6 +46,11 @@ navigationApp.controller('navigationController', function navigationController($
 			defaults: {
 			minZoom: 5,
 			maxZoom: 10,
+			scrollWheelZoom: false,
+			boxZoom: false,
+			dragging: false,
+			keyboard: true,
+			tap: false,
 			path: {
 				weight: 12,
 				color: '#23De23',
@@ -118,7 +123,6 @@ navigationApp.controller('navigationController', function navigationController($
 		method: 'GET',
 		url:BASE_URL + '/major_cities'
 		}).then(function successCallback(response) {
-    	$log.debug(response.data);//for debug
 			$scope.cities = response.data;
 			createCityMarkers();
 		},
@@ -205,7 +209,14 @@ navigationApp.controller('navigationController', function navigationController($
 		createCityMarkers();
 	}
 
+	var disableScrolling = function(){
+		leafletData.getMap().then(function(map){
+			map.dragging.disable();
+		});
+	}
+
 	//get available cities on app start
   getCities();
+	disableScrolling();
 	$scope.distance = null;
-});
+}]);
