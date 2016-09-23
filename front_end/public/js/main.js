@@ -50,7 +50,7 @@ navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$l
 			boxZoom: false,
 			dragging: false,
 			keyboard: true,
-			tap: false,
+			tap: true,
 			path: {
 				weight: 12,
 				color: '#23De23',
