@@ -46,10 +46,6 @@ navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$l
 			defaults: {
 			minZoom: 5,
 			maxZoom: 10,
-			scrollWheelZoom: false,
-			boxZoom: false,
-			dragging: false,
-			keyboard: true,
 			tap: true,
 			path: {
 				weight: 12,
