@@ -213,6 +213,7 @@ navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$l
 	}
 
 	//get available cities on app start
-  getCities();
+	getCities();
+	//disableScrolling();
 	$scope.distance = null;
 }]);
