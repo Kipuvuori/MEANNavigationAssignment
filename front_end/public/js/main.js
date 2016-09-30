@@ -46,6 +46,7 @@ navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$l
 			defaults: {
 			minZoom: 5,
 			maxZoom: 10,
+			dragging: true,
 			tap: true,
 			path: {
 				weight: 12,
@@ -213,6 +214,5 @@ navigationApp.controller('navigationController',[ '$scope', '$http', '$log', '$l
 
 	//get available cities on app start
   getCities();
-	disableScrolling();
 	$scope.distance = null;
 }]);
