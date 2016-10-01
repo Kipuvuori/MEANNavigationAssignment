@@ -5,11 +5,19 @@ var parse = require('csv-parse');
 var Mongo = require('./Mongo.js');
 var GoogleAPI = require('./GoogleAPI');
 
+/**
+ * Class MajorCities
+ * for handeling major cities.
+ */
 class MajorCities {
   constructor() {
     this.limit = 20 * 3;
   }
 
+/**
+ * Parses CSV file that PATH_MAJOR_CITIES_JSON points to.
+ * @param  {Function} callback Function to be called with the result
+ */
   parseCSV(callback)
   {
     var self=this;
@@ -78,6 +86,11 @@ class MajorCities {
     fs.createReadStream(conf.PATH_MAJOR_CITIES_JSON).pipe(parser);
   }
 
+/**
+ * Function for getting major cities.
+ * This will parse from CSV if there are any in database.
+ * @param  {Function} callback Function what will be called with the result.
+ */
   get(callback)
   {
     var self=this;

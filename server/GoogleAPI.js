@@ -20,7 +20,6 @@ class GoogleAPI {
    * @param  {string}   destination End point for the route.
    * @param  {string}   data_type   Type of data (JSON, XML)
    * @param  {Function} cb          Funtion to call with finnished Array
-   * @return {void}                 This function does not return anything
    */
   directions(origin, destination, data_type, cb)
   {
@@ -92,7 +91,6 @@ class GoogleAPI {
  * @param  {string}   address   Address to geocode
  * @param  {string}   data_type Type of data (JSON, XML)
  * @param  {Function} cb        Funtion that will be called with data.
- * @return {void}                 This function does not return anything
  */
   geocoding(address, data_type, cb)
   {
