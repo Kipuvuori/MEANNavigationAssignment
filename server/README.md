@@ -71,7 +71,7 @@ There is [a example file](https://raw.githubusercontent.com/13i224HetekiviLehmus
 * [apicache](https://github.com/kwhitley/apicache)
   * For caching major cities.
 
-### Credits and license.
+### Credits and license
 
 * Made by [Santeri Hetekivi](https://github.com/SanteriHetekivi) with association with projects front end developer [Anton Lehmus](https://github.com/AntonLehmus).
 * Made for [Tampere University of Applied Sciences](http://www.tamk.fi/web/tamken).
