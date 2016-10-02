@@ -21,7 +21,7 @@ class MajorCities {
   parseCSV(callback)
   {
     var self=this;
-    var parser = parse({delimiter: ';'},
+    var parser = parse({delimiter: ','},
       function(err, data)
       {
         if(err)
