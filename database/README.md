@@ -4,14 +4,8 @@ Simple MongoDB database for [MEANNavigationAssignment](https://github.com/13i224
 
 ## Structure
 
-Example:
-1. Database
-  1. Collection
-    * Definition  
-
-Real:
-1. mean_navigation
-  1. major_cities
+* Database: ***mean_navigation***
+  * Collection: ***major_cities***
     * Contains major cities for fast usage.
     * Cities are parsed from .csv file and coordinates got from Google.
       ```json
@@ -23,7 +17,7 @@ Real:
         "lng" : 24.6559001
       }
       ```
-  1. routes (optional)
+  * Collection: ***routes*** (optional)
     * **Not used in current version!**
     * Contains routes between points.
     ```json
@@ -34,7 +28,7 @@ Real:
         "distance" : 183645
       }
       ```
-  1. points (optional)
+  * Collection: ***points*** (optional)
     * **Not used in current version!**
     * Contains points for the routes.
     * Links to route with route_id.
@@ -48,6 +42,17 @@ Real:
         "route_id" : ObjectId("57cb1a9f571ea8a32a968923")
     }
     ```
+
+### Deploying
+
+ * Install MongoDB database.
+  * [GNU/Linux](https://docs.mongodb.com/manual/administration/install-on-linux/)
+  * [OS X/macOS](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+  * [Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+ * Add database info to conf.js file in project's root directory.  
+ Example can be seen in [conf_EXAMPLE.js](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/conf_EXAMPLE.js) file.
+ * Server side of the project will handle the database from there.
+
 
 ### Credits and license.
 
