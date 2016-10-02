@@ -15,7 +15,7 @@ Aim of this assignment is to create simple node based navigation between Finnish
 4. Read and implement [Front end documentation](https://github.com/13i224HetekiviLehmus/MEANNavigationAssignment/blob/master/front_end/readme.md).
 5. All done!
 
-### Credits and license.
+### Credits and license
 
 * Server side made by [Santeri Hetekivi](https://github.com/SanteriHetekivi).
 * Front end made by [Anton Lehmus](https://github.com/AntonLehmus).
