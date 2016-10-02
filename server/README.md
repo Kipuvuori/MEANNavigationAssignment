@@ -50,10 +50,10 @@ There is [a example file](https://raw.githubusercontent.com/13i224HetekiviLehmus
 
 ### Deploying
 
- * Make conf.js file to root of the project that has all field of [conf_EXAMPLE.js](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/conf_EXAMPLE.js) file.
- * Run command to build dependencies.
+1. Make conf.js file to root of the project that has all field of [conf_EXAMPLE.js](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/conf_EXAMPLE.js) file.
+2. Run command to build dependencies.
   * ``` npm install ```
- * Run command to start back end server.
+3. Run command to start back end server.
   * ``` node server.js ```
 
 ### Dependencies
