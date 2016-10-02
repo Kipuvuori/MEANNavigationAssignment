@@ -1,3 +1,10 @@
+/*
+  Made by Santeri Hetekivi
+  for Tampere University Of Applied Sciences.
+  Licensed under Apache License 2.0.
+  10/2016
+*/
+
 var conf = require("./../conf");
 
 var fs = require('fs');

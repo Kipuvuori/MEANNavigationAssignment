@@ -2,7 +2,7 @@
   "name": "server",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Server side of the MEANNavigationAssignment.",
   "main": "server.js",
   "dependencies": {
     "cors": "^2.8.1",
