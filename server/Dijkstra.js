@@ -3,9 +3,20 @@ var tools = require("./../Tools");
 
 var MajorCities = require('./MajorCities.js');
 
+/**
+ * Class Dijkstra
+ * for handeling dijkstra algorithm.
+ */
 class Dijkstra {
   constructor() {
   }
+
+/**
+ * Call given callback function with fastest route between origin and destination.
+ * @param  {string}   origin      Name of the origin city.
+ * @param  {string}   destination Name of the destination city.
+ * @param  {Function} callback    Function that will be called with result.
+ */
   getRoute(origin, destination, callback)
   {
     var self = this;
@@ -63,6 +74,12 @@ class Dijkstra {
       }
     );
   }
+
+/**
+ * Turns major cities to two dimentional array.
+ * @param  {Array} major_cities Array containing major city objects.
+ * @return {Array}              Given major cities as a two dimentional array.
+ */
   toTwoDimentionalArray(major_cities)
   {
     if(major_cities.length > 0)
@@ -112,6 +129,11 @@ class Dijkstra {
     else return [];
   }
 
+/**
+ * Makes nodes from two dimentional array.
+ * @param  {Array} rows Two dimentional array containing all locations.
+ * @return {Object}     Map as nodes.
+ */
   nodes(rows)
   {
     var nodes = {};
@@ -142,6 +164,13 @@ class Dijkstra {
     return nodes;
   }
 
+/**
+ * Return fastest_route trought given nodes from origin to destination.
+ * @param  {Object} nodes       Map as nodes.
+ * @param  {string} origin      Name of starting node.
+ * @param  {string} destination Name of ending node.
+ * @return {Object}             Return object with route and total distance.
+ */
   fastest_route(nodes, origin, destination)
   {
     var dist = {};
