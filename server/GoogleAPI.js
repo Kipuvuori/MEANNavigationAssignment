@@ -1,3 +1,10 @@
+/*
+  Made by Santeri Hetekivi
+  for Tampere University Of Applied Sciences.
+  Licensed under Apache License 2.0.
+  10/2016
+*/
+
 var conf = require("./../conf");
 
 var fs = require('fs');
@@ -5,11 +12,22 @@ var https = require('https');
 
 var Mongo = require('./Mongo.js');
 
+/**
+ * Class GoogleAPI
+ * for making Google API calls.
+ */
 class GoogleAPI {
   constructor() {
     this.BASE_URL="https://maps.googleapis.com/maps/api/";
   }
 
+  /**
+   * Getting directions between origin and destination.
+   * @param  {string}   origin      Start point for the route.
+   * @param  {string}   destination End point for the route.
+   * @param  {string}   data_type   Type of data (JSON, XML)
+   * @param  {Function} cb          Funtion to call with finnished Array
+   */
   directions(origin, destination, data_type, cb)
   {
     var url=this.BASE_URL+"directions/"+data_type+"?origin="+origin+"&destination="+destination+"&key="+conf.API_DIRECTIONS_KEY;
@@ -75,6 +93,12 @@ class GoogleAPI {
     );
   }
 
+/**
+ * Turns address string to coordinates.
+ * @param  {string}   address   Address to geocode
+ * @param  {string}   data_type Type of data (JSON, XML)
+ * @param  {Function} cb        Funtion that will be called with data.
+ */
   geocoding(address, data_type, cb)
   {
     // Make url for request

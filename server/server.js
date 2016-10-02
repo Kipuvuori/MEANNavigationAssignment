@@ -1,3 +1,10 @@
+/*
+  Made by Santeri Hetekivi
+  for Tampere University Of Applied Sciences.
+  Licensed under Apache License 2.0.
+  10/2016
+*/
+
 var conf = require("./../conf");
 
 var express = require('express');
@@ -25,6 +32,7 @@ var corsOptions = {
 };
 
 
+// Return route between origin and destination cities.
 app.get('/:origin/:destination',
 	cors(corsOptions),
   function(request, response)
@@ -44,6 +52,7 @@ app.get('/:origin/:destination',
   }
 );
 
+// Return all of the major cities.
 app.get("/major_cities",
 	cors(corsOptions), apicache('5 minutes'),
   function(request, response)

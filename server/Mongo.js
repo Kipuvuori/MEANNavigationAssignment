@@ -1,17 +1,35 @@
+/*
+  Made by Santeri Hetekivi
+  for Tampere University Of Applied Sciences.
+  Licensed under Apache License 2.0.
+  10/2016
+*/
+
 var conf = require("./../conf");
 
 var mongodb = require('mongodb');
 
 var MongoClient = mongodb.MongoClient;
 
+/**
+ * Connection url to MongoDB database.
+ * @type {String}
+ */
 var url = "mongodb://"+conf.SERVER_DATABASE+":"+conf.PORT_DATABASE+"/"+conf.DATABASE;
 
+/**
+ * Class Mongo
+ * for making calls to MongoDB database.
+ */
 class Mongo {
   constructor() {
 
   }
 
-  // Function query for making MonoDB query.
+  /**
+   * Makes query to MongoDB database.
+   * @param  {Function} query To be run on MongoDB database.
+   */
   query(query)
   {
     // Connect to MongoDB databse.
@@ -30,6 +48,12 @@ class Mongo {
     });
   }
 
+/**
+ * Inserts data to MongoDB database.
+ * @param  {string}   collection_name [description]
+ * @param  {object}   data            Data that will be inserted.
+ * @param  {Function} callback        Function that will be called with result.
+ */
   insert(collection_name, data, callback)
   {
     if(!data || data == null || data.length <= 0) return false;
@@ -48,6 +72,14 @@ class Mongo {
     );
   }
 
+/**
+ * Find data from MongoDB database.
+ * @param  {string}   collection_name Name for the MongoDB collection.
+ * @param  {Object}   query           Query to send to MongoDB.
+ * @param  {Object}   columns         Columns that will be returned.
+ * @param  {Object}   options         Options for the find.
+ * @param  {Function} callback        Function that will be called with result.
+ */
   find(collection_name, query, columns, options, callback)
   {
     this.query(
@@ -65,6 +97,12 @@ class Mongo {
     );
   }
 
+/**
+ * Find one row from MongoDB database.
+ * @param  {string}   collection_name Name for the MongoDB collection.
+ * @param  {Object}   query           Query to send to MongoDB.
+ * @param  {Function} callback        Function that will be called with result.
+ */
   findOne(collection_name, query, callback)
   {
     this.query(
@@ -82,7 +120,11 @@ class Mongo {
     );
   }
 
-  // Query for adding route to database
+  /**
+   * Query for adding route to database
+   * @param {Object} route  Route to add to MongoDB database.
+   * @param {Array} points Array of point objects to add to route.
+   */
   addRoute(route, points)
   {
     var routes = [route];
@@ -115,6 +157,12 @@ class Mongo {
     );
   }
 
+/**
+ * Getting route from database.
+ * @param  {string} origin      Origin of the route.
+ * @param  {string} destination Destination of the route.
+ * @param  {Function} return_cb Function that will be called with result.
+ */
   getRoute(origin, destination, return_cb)
   {
     var route={origin:origin, destination:destination};

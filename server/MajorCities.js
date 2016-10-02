@@ -1,3 +1,10 @@
+/*
+  Made by Santeri Hetekivi
+  for Tampere University Of Applied Sciences.
+  Licensed under Apache License 2.0.
+  10/2016
+*/
+
 var conf = require("./../conf");
 var fs = require('fs');
 var parse = require('csv-parse');
@@ -5,15 +12,23 @@ var parse = require('csv-parse');
 var Mongo = require('./Mongo.js');
 var GoogleAPI = require('./GoogleAPI');
 
+/**
+ * Class MajorCities
+ * for handeling major cities.
+ */
 class MajorCities {
   constructor() {
     this.limit = 20 * 3;
   }
 
+/**
+ * Parses CSV file that PATH_MAJOR_CITIES_JSON points to.
+ * @param  {Function} callback Function to be called with the result
+ */
   parseCSV(callback)
   {
     var self=this;
-    var parser = parse({delimiter: ';'},
+    var parser = parse({delimiter: ','},
       function(err, data)
       {
         if(err)
@@ -78,6 +93,11 @@ class MajorCities {
     fs.createReadStream(conf.PATH_MAJOR_CITIES_JSON).pipe(parser);
   }
 
+/**
+ * Function for getting major cities.
+ * This will parse from CSV if there are any in database.
+ * @param  {Function} callback Function what will be called with the result.
+ */
   get(callback)
   {
     var self=this;
