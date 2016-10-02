@@ -55,7 +55,7 @@ Simple MongoDB database for [MEANNavigationAssignment](https://github.com/13i224
   Example can be seen in [conf_EXAMPLE.js] (https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/conf_EXAMPLE.js) file.  
 3. Server side of the project will handle the database from there.
 
-### Credits and license.
+### Credits and license
 
 * Made by [Santeri Hetekivi](https://github.com/SanteriHetekivi) with association with projects front end developer [Anton Lehmus](https://github.com/AntonLehmus).
 * Made for [Tampere University of Applied Sciences](http://www.tamk.fi/web/tamken).
