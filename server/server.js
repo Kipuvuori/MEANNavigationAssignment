@@ -25,6 +25,7 @@ var corsOptions = {
 };
 
 
+// Return route between origin and destination cities.
 app.get('/:origin/:destination',
 	cors(corsOptions),
   function(request, response)
@@ -44,6 +45,7 @@ app.get('/:origin/:destination',
   }
 );
 
+// Return all of the major cities.
 app.get("/major_cities",
 	cors(corsOptions), apicache('5 minutes'),
   function(request, response)
