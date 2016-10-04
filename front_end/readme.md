@@ -15,4 +15,5 @@ Draw route on map and show info about in when clicked on. Map and routes is draw
 
 
 
+ Color theme generated on [lavishbootstrap](http://www.lavishbootstrap.com/).
  Maps provided by OpenStreetmap. [Lisence](https://www.openstreetmap.org/copyright).
