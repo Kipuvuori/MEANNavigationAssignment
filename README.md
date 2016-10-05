@@ -3,7 +3,7 @@
 
 Aim of this assignment is to create simple node based navigation between Finnish cities using MEAN stack.
 
-![Start Screen](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/readme_changes/data/images/start_screen.PNG)
+![Start Screen](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/data/images/start_screen.PNG)
 
 ### Deploying  
 1. Install Node.js
