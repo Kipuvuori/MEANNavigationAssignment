@@ -3,7 +3,7 @@
 
 Aim of this assignment is to create simple node based navigation between Finnish cities using MEAN stack.
 
-Live demo at [http://vanillasky.ddns.me:8888](http://vanillasky.ddns.me:8888)
+Live demo at [http://antonlehmus.me:8888/](http://antonlehmus.me:8888/)
 
 ![Start Screen](https://raw.githubusercontent.com/13i224HetekiviLehmus/MEANNavigationAssignment/master/data/images/start_screen.PNG)
 
